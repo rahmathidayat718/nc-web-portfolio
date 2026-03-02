@@ -301,6 +301,7 @@ nav ul li a {
   display: flex;
   gap: 1rem;
   margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
 .portfolio-tags div {
@@ -308,6 +309,7 @@ nav ul li a {
   border: 1px solid var(--borderColor);
   padding: 0.4rem 1rem;
   color: var(--secondaryTextColor);
+  white-space: nowrap;
 }
 
 .portfolio-tags div {
@@ -477,4 +479,10 @@ footer {
 
 .footer-icons a:hover svg {
   fill: #000;
+}
+
+.portfolio-description {
+  text-align: justify; /* rata kanan kiri */
+  text-indent: 1.5rem; /* baris pertama menjorok */
+  line-height: 1.6; /* biar lebih enak dibaca */
 }
