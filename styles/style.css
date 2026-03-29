@@ -121,16 +121,42 @@ a {
 }
 
 /* --- Logo and Navigation Menu --- */
+/* NAV WRAPPER */
 .nav {
   display: flex;
   justify-content: space-between;
   padding: 2rem 0;
 }
 
+/* NAV MENU (INI YANG DI SLIDE) */
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 60%;
+  background: white;
+
+  transform: translateX(100%);
+  transition: 0.3s ease-in-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* AKTIF */
+nav.active {
+  transform: translateX(0);
+}
+
+/* MENU LIST */
 nav ul {
   list-style: none;
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
 }
 
 /* Logo */
@@ -275,6 +301,10 @@ nav ul li a {
 
 .portfolio-info {
   padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .portfolio-title {
@@ -485,4 +515,19 @@ footer {
   text-align: justify; /* rata kanan kiri */
   text-indent: 1.5rem; /* baris pertama menjorok */
   line-height: 1.6; /* biar lebih enak dibaca */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* jumlah baris */
+  -webkit-box-orient: vertical;
+}
+
+.portfolio-description.expanded {
+  -webkit-line-clamp: unset;
+}
+
+.read-more-btn {
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 8px;
 }
