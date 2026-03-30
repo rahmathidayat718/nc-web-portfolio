@@ -192,11 +192,13 @@ nav ul li a {
 }
 
 .burger {
-  display: none;
+  display: flex;
+  flex-direction: column;
   z-index: 99;
   position: fixed;
   top: 33px;
   right: 35px;
+  cursor: pointer;
 }
 
 /* Hero Section */
