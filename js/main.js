@@ -1,54 +1,110 @@
-const readMoreButtons = document.querySelectorAll(".read-more-btn");
+// ===============================
+// READ MORE TOGGLE
+// ===============================
+const initReadMore = () => {
+  const buttons = document.querySelectorAll(".read-more-btn");
 
-readMoreButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const desc = btn.previousElementSibling;
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const desc = btn.previousElementSibling;
 
-    desc.classList.toggle("expanded");
+      if (!desc) return;
 
-    if (desc.classList.contains("expanded")) {
-      btn.textContent = "Show Less";
-    } else {
-      btn.textContent = "Read More";
-    }
+      desc.classList.toggle("expanded");
+
+      btn.textContent = desc.classList.contains("expanded")
+        ? "Show Less"
+        : "Read More";
+    });
   });
-});
+};
 
-// Toggle & Responsive Navigation
-const navSlide = () => {
+// ===============================
+// NAVBAR (BURGER MENU)
+// ===============================
+const initNavbar = () => {
   const burger = document.querySelector(".burger");
   const nav = document.querySelector("nav");
   const navLinks = document.querySelectorAll("nav ul li a");
 
-  // 🔥 toggle burger
+  if (!burger || !nav) return;
+
+  // Toggle burger
   burger.addEventListener("click", (e) => {
     e.stopPropagation();
     nav.classList.toggle("active");
     burger.classList.toggle("toggle-burger");
   });
 
-  // 🔥 klik menu → auto close
+  // Klik menu → auto close
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      nav.classList.remove("active");
-      burger.classList.remove("toggle-burger");
+      closeNav();
     });
   });
 
-  // 🔥 klik luar → auto close
+  // Klik luar → auto close
   document.addEventListener("click", (e) => {
     if (!nav.contains(e.target) && !burger.contains(e.target)) {
-      nav.classList.remove("active");
-      burger.classList.remove("toggle-burger");
+      closeNav();
     }
+  });
+
+  const closeNav = () => {
+    nav.classList.remove("active");
+    burger.classList.remove("toggle-burger");
+  };
+};
+
+// ===============================
+// CLEAR FORM ON RELOAD
+// ===============================
+const resetFormsOnReload = () => {
+  window.addEventListener("beforeunload", () => {
+    document.querySelectorAll("form").forEach((form) => form.reset());
   });
 };
 
-navSlide();
+// ===============================
+// INIT ALL
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  initReadMore();
+  initNavbar();
+  resetFormsOnReload();
+  typingEffect();
+});
 
-// Clear form before unload
-window.onbeforeunload = () => {
-  for (const form of document.getElementsByTagName("form")) {
-    form.reset();
-  }
+// ===============================
+// TYPING EFFECT (2 WARNA)
+// ===============================
+const typingEffect = () => {
+  const firstName = "Rahmat";
+  const lastName = "Hidayat";
+
+  const firstEl = document.getElementById("typing-first");
+  const lastEl = document.getElementById("typing-last");
+
+  let i = 0;
+  let j = 0;
+
+  const typeFirst = () => {
+    if (i < firstName.length) {
+      firstEl.textContent += firstName.charAt(i);
+      i++;
+      setTimeout(typeFirst, 80);
+    } else {
+      setTimeout(typeLast, 200); // jeda dikit biar smooth
+    }
+  };
+
+  const typeLast = () => {
+    if (j < lastName.length) {
+      lastEl.textContent += lastName.charAt(j);
+      j++;
+      setTimeout(typeLast, 80);
+    }
+  };
+
+  typeFirst();
 };
